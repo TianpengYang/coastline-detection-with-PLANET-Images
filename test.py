@@ -20,7 +20,6 @@ def blend_images(im_1, im_2, alpha=0.7, name="blended.png"):
     cv2.imwrite("edge_results/blend/" + name, dst)
 
 
-
 def run_a_bunch_of_samples(im, blur, upper_bounds, lower_bounds, directory):
     im = cv2.GaussianBlur(im, blur, 0)
 
@@ -42,6 +41,36 @@ def grayscale_with_color_bar(image, colormap="gist_gray", name="grayscale with c
     plt.savefig("grayscale_colorbar/" +name)
     plt.show()
 
+
+def hed_detailed(image):
+    """
+    Not currently a solution
+
+    :param image:
+    :return:
+    """
+    im = cv2.imread(image)
+    for x in range(im.shape[0]):
+        for y in range(im.shape[1]):
+            if im[x, y, 0] < 200:
+                im[x, y] = [0, 0, 0]
+
+    cv2.imwrite("edge_results/hed_detailed.png", im)
+
+
+def sobel(image, name="sobel.png"):
+    sobelX = cv2.Sobel(image, cv2.CV_64F, 1, 0)
+    sobelY = cv2.Sobel(image, cv2.CV_64F, 0, 1)
+    sobelX = np.uint8(np.absolute(sobelX))
+    sobelY = np.uint8(np.absolute(sobelY))
+    sobelCombined = cv2.bitwise_or(sobelX, sobelY)
+
+    cv2.imwrite("edge_results/sobel" + name, sobelCombined)
+
+
+
+
+"""
 
 blend_images("/home/nelson/PycharmProjects/coastline_detection_with_LANDSAT/good_images/output.jpg",
              "/home/nelson/PycharmProjects/coastline_detection_with_LANDSAT/"
@@ -94,6 +123,10 @@ blend_images("/home/nelson/PycharmProjects/coastline_detection_with_LANDSAT/good
              "/home/nelson/PycharmProjects/coastline_detection_with_LANDSAT/edge_results/"
              "ndwi_edge/out2_ndwi_canny_edge.png",
              name="out2_ndwi_canny_edge.png")
+
+
+
+"""
 
 """
 ndwi_image = cv2.imread("/home/nelson/PycharmProjects/coastline_detection_with_LANDSAT/"
