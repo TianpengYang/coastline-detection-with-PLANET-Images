@@ -42,22 +42,6 @@ def grayscale_with_color_bar(image, colormap="gist_gray", name="grayscale with c
     plt.show()
 
 
-def hed_detailed(image):
-    """
-    Not currently a solution
-
-    :param image:
-    :return:
-    """
-    im = cv2.imread(image)
-    for x in range(im.shape[0]):
-        for y in range(im.shape[1]):
-            if im[x, y, 0] < 200:
-                im[x, y] = [0, 0, 0]
-
-    cv2.imwrite("edge_results/hed_detailed.png", im)
-
-
 def sobel(image, name="sobel.png"):
     sobelX = cv2.Sobel(image, cv2.CV_64F, 1, 0)
     sobelY = cv2.Sobel(image, cv2.CV_64F, 0, 1)
