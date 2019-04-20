@@ -161,7 +161,7 @@ class makeEdge:
         This function uses the below console commands that are made via gdal_translate.
         I will explain each and what they do along with how I have implemented them in python
 
-        All time.sleep() aret to allow time for the terminal thread to finish executing
+        All time.sleep() are to allow time for the terminal thread to finish executing
 
         gdal_translate tiff_file intermediate_tif -b 3 -b 2 -b 1 -co COMPRESS=DEFLATE -co PHOTOMETRIC=RGB
         This command takes out the first three bands of the original tiff file and moves them to correct band
